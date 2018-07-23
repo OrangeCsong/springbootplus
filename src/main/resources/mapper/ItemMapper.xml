@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masterdemo.springbootplus.mapper.ItemMapper">
+    <resultMap id="BaseResultMap" type="Item">
+        <result column="item_id" property="itemId" />
+        <result column="item_name" property="itemName" />
+        <result column="item_desc" property="itemDesc" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        item_id,item_name,item_desc
+    </sql>
+
+    <!--增加addItem-->
+    <insert id="addItem" parameterType="Item" useGeneratedKeys="true" keyProperty="itemId">
+        insert into item(item_id,item_name,item_desc)
+        values (#{itemId},#{itemName},#{itemDesc})
+    </insert>
+    <!--删除deleteItem-->
+    <delete id="deleteItem" parameterType="int">
+        delete from item where item_id = #{id}
+    </delete>
+    <!--修改updateItem-->
+   <!-- <update id="updateItem" parameterType="Item">
+        update item set
+        <if test="itemName!=null">
+            item_name = #{itemName},
+        </if>
+        <if test="itemDesc!=null">
+            item_desc = #{itemDesc}
+        </if>
+        where
+        item_id = #{itemId}
+    </update>-->
+    <update id="updateItem" parameterType="Item">
+        update item
+        <set>
+            <if test="itemName!=null">
+                item_name = #{itemName}
+            </if>,
+            <if test="itemDesc!=null">
+                item_desc = #{itemDesc}
+            </if>
+        </set>
+        where
+        item_id = #{itemId}
+    </update>
+    <!--id查getItemById-->
+    <select id="getItemById" parameterType="int" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from item
+        where
+        item_id = #{id}
+    </select>
+    <!--list查getItem-->
+    <select id="getItem" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from item
+    </select>
+</mapper>
