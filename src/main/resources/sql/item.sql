@@ -10,23 +10,24 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2018-07-19 11:50:17
+Date: 2018-07-23 17:03:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for demo
+-- Table structure for item
 -- ----------------------------
-DROP TABLE IF EXISTS `demo`;
-CREATE TABLE `demo` (
-  `userid` int(11) NOT NULL,
-  `username` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`userid`)
+DROP TABLE IF EXISTS `item`;
+CREATE TABLE `item` (
+  `item_id` int(11) NOT NULL,
+  `item_name` varchar(255) DEFAULT NULL,
+  `item_desc` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`item_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of demo
+-- Records of item
 -- ----------------------------
-INSERT INTO `demo` VALUES ('1', 'orange', '123');
+INSERT INTO `item` VALUES ('1', 'censong11', 'miaoshu11');
+INSERT INTO `item` VALUES ('2', 'censong11', 'miaoshu11');
