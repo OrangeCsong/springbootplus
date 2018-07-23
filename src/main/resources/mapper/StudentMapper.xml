@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.masterdemo.springbootplus.mapper.StudentMapper">
+    <resultMap id="BaseResultMap" type="Student">
+        <result column="stu_id" property="stuId" />
+        <result column="stu_name" property="stuName" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        stu_id,stu_name
+    </sql>
+
+    <insert id="addStudent" parameterType="Student">
+        insert into student(stu_id,stu_name)
+        values (#{stuId},#{stuName})
+    </insert>
+    <delete id="deleteStudent" parameterType="Integer">
+        delete from student where stu_id = #{id}
+    </delete>
+    <update id="updateStudent" parameterType="Student">
+        update student
+        <set>
+            <if test="stuName!=null">
+                stu_name = #{stuName}
+            </if>
+        </set>
+        where stu_id = #{stuId}
+    </update>
+    <select id="getStudentById" parameterType="Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from student
+        where stu_id = #{id}
+    </select>
+</mapper>
